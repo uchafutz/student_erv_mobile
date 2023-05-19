@@ -5,16 +5,17 @@ import axios from "axios";
 export const QuestionsContext = createContext()
 
 
-export const QuestionsContextProvider = ({children})=> {
+export const QuestionsContextProvider = ({ children }) => {
 
     const [course, setCourse] = useState({})
     const [questions, setQuestions] = useState([])
-    const {authToken} = useContext(AuthContext)
+    const { authToken } = useContext(AuthContext)
+    const { studentInfo } = useContext(AuthContext)
 
 
-    const fetchQuestionsDetails = async () =>{
+    const fetchQuestionsDetails = async () => {
 
-        await axios.get('http://192.168.10.32:8001/api/department/students/1', {
+        await axios.get(`http://192.168.10.32:8001/api/department/students/${studentInfo.id}`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -23,17 +24,17 @@ export const QuestionsContextProvider = ({children})=> {
         }).then(response => {
             setCourse(response.data.course[0])
             response.data.questions.forEach((question) => {
-                 setQuestions(prev => [...prev, question])
+                setQuestions(prev => [...prev, question])
             })
         }).catch(e => {
             console.log(e);
         })
 
     }
-   
+
 
     return (
-        <QuestionsContext.Provider value={{course,questions,fetchQuestionsDetails}}>
+        <QuestionsContext.Provider value={{ course, questions, fetchQuestionsDetails }}>
             {children}
         </QuestionsContext.Provider>
     )
