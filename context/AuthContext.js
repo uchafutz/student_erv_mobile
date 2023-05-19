@@ -4,50 +4,53 @@ import React, { createContext, useState } from "react";
 
 export const AuthContext = createContext()
 
+const userInformation = {
+  user_id: "",
+  token: ""
+}
+export const AuthContextProvider = ({ children }) => {
 
-export const AuthContextProvider = ({children}) => {
+  const [authToken, setAuthToken] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [studentInfo, setStudentInfo] = useState({})
 
-    const [authToken, setAuthToken] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
-    const [studentInfo, setStudentInfo] = useState({})
-
-    const login = async (studentId, password) => {
+  const login = async (studentId, password) => {
 
     if (studentId && password) {
-    await axios.post('http://192.168.10.32:8001/api/authentication/login', {
-      reg_id: studentId,
-      password
-    },
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }
-    )
-    .then(function (response) {
-      setStudentInfo(response.data.student[0])
-      setAuthToken(response.data.token)
-    })
-    .catch(function (error) {
-      alert("Please provide correct credentials.")
-    });
+      await axios.post('http://192.168.10.32:8001/api/authentication/login', {
+        reg_id: studentId,
+        password
+      },
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+        .then(function (response) {
+          setStudentInfo(response.data.student[0])
+          setAuthToken(response.data.token)
+        })
+        .catch(function (error) {
+          alert("Please provide correct credentials.")
+        });
 
     }
-    else{
-        alert('Please enter studentId and password.')
+    else {
+      alert('Please enter studentId and password.')
     }
-    }
+  }
 
-    const logout = () =>{
-      setAuthToken(null)
-    }
-    
-    return (
-      <AuthContext.Provider value={{authToken, login, isLoading, logout, studentInfo}}>
+  const logout = () => {
+    setAuthToken(null)
+  }
+
+  return (
+    <AuthContext.Provider value={{ authToken, login, isLoading, logout, studentInfo }}>
       {children}
-      </AuthContext.Provider>
-    )
+    </AuthContext.Provider>
+  )
 
 
 }
