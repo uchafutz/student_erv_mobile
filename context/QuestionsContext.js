@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
+import { endpointurl } from "../api/api";
 
 export const QuestionsContext = createContext()
 
@@ -15,7 +16,7 @@ export const QuestionsContextProvider = ({ children }) => {
 
     const fetchQuestionsDetails = async () => {
 
-        await axios.get(`http://192.168.10.32:8001/api/department/students/${studentInfo.id}`, {
+        await axios.get(`${endpointurl}api/department/students/${studentInfo.id}`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

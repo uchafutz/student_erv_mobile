@@ -1,0 +1,1 @@
+export const endpointurl = "http://192.168.10.32:8001/";
