@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 
 export const AuthContext = createContext()
@@ -7,14 +7,14 @@ export const AuthContext = createContext()
 
 export const AuthContextProvider = ({children}) => {
 
-    const [authToken, setAuthToken] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
+    const [authToken, setAuthToken] = useState('mm')
     const [studentInfo, setStudentInfo] = useState({})
+
 
     const login = async (studentId, password) => {
 
     if (studentId && password) {
-    await axios.post('http://192.168.10.32:8001/api/authentication/login', {
+    await axios.post('http://192.168.213.66:8001/api/authentication/login', {
       reg_id: studentId,
       password
     },
@@ -41,10 +41,11 @@ export const AuthContextProvider = ({children}) => {
 
     const logout = () =>{
       setAuthToken(null)
+      setStudentInfo({})
     }
     
     return (
-      <AuthContext.Provider value={{authToken, login, isLoading, logout, studentInfo}}>
+      <AuthContext.Provider value={{authToken, login, logout, studentInfo}}>
       {children}
       </AuthContext.Provider>
     )

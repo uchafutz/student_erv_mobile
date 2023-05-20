@@ -7,15 +7,17 @@ import { QuestionsContext } from './context/QuestionsContext'
 
 
 const Router = () => {
-  const {authToken} = useContext(AuthContext)
-  const {fetchQuestionsDetails, course, questions} = useContext(QuestionsContext)
+  const {authToken, studentInfo} = useContext(AuthContext)
+  const {fetchQuestionsDetails} = useContext(QuestionsContext)
+
 
   useEffect(()=>{
-
-    fetchQuestionsDetails()
+    if (authToken) {
+      fetchQuestionsDetails(studentInfo)  
+    }
+    console.log('useeffect of router');
+  },[authToken])
   
-  },[])
-
 
   return (
     <NavigationContainer>

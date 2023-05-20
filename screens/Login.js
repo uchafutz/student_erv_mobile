@@ -1,7 +1,8 @@
 import { Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { QuestionsContext } from '../context/QuestionsContext'
 
 const Login = () => {
 
@@ -9,7 +10,11 @@ const [studentId, setStudentId] = useState("")
 const [password, setPassword] = useState("")
 
 const {login} = useContext(AuthContext);
+// const {fetchQuestionsDetails} = useContext(QuestionsContext)
 
+  // useEffect(()=>{
+  //   fetchQuestionsDetails(studentInfo) 
+  // },[studentInfo])
 
   return (
     <KeyboardAwareScrollView>

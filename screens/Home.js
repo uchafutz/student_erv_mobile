@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SafeViewAndroid from '../components/SafeViewAndroid'
 import { AuthContext } from '../context/AuthContext'
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
@@ -12,7 +12,8 @@ import axios from 'axios';
 
 const Home = () => {
 
-
+const {logout, studentInfo, authToken} = useContext(AuthContext)
+const {course,questions,fetchQuestionsDetails} = useContext(QuestionsContext)
 const [lecture, setLecture] = useState(null);
 const [module, setModule] = useState(null);
 const [comment, setComment] = useState('');
@@ -20,11 +21,12 @@ const [rates, setRates] = useState(0);
 const [isFocus, setIsFocus] = useState(false);
 const [items, setItems] = useState([])
 
-
-
-const {logout, studentInfo, authToken} = useContext(AuthContext)
-const {course,questions} = useContext(QuestionsContext)
-
+// useEffect(()=>{
+//   if (authToken) {
+//     fetchQuestionsDetails()
+//   }
+//   console.log('useeffect of home');
+// },[authToken])
 
 const lectures = []
 
@@ -242,7 +244,7 @@ const submitAnswer = async () => {
           {
           lecture && module && questions.map((question,i) => {
             return (
-              <View key={question.id} className="mt-5">
+              <View key={i} className="mt-5">
               <Text className="text-xl font-semibold">Question {i+2}</Text>
               <Text className="font-semibold mb-2">{question.name}</Text>
                  {
