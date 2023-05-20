@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useState } from "react";
-
+import { endpointurl } from "../api/api";
 
 export const AuthContext = createContext()
 
@@ -17,7 +17,7 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (studentId, password) => {
 
     if (studentId && password) {
-      await axios.post('http://192.168.10.32:8001/api/authentication/login', {
+      await axios.post(`${endpointurl}api/authentication/login`, {
         reg_id: studentId,
         password
       },
