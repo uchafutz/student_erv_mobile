@@ -170,14 +170,14 @@ const Home = () => {
           </View>
           <View className="p-3 mt-7 rounded-md border border-blue-500">
             <View>
-              <Text className="text-md font-semibold text-blue-500">Course: {studentInfo.courses.name.toUpperCase()}</Text>
+              <Text className="text-md font-semibold text-blue-500">Programme: {studentInfo.courses.name.toUpperCase()}</Text>
               <Text className="text-md font-semibold text-blue-500">Department: {studentInfo.courses.departments.name.toUpperCase()}</Text>
             </View>
           </View>
           <View className="border-t border-blue-500 mt-5"></View>
 
           <View className="flex gap-2 mt-5">
-            <Text className="font-semibold mb-2">Please choose the Lecturer and module below to start your evaluation,</Text>
+            <Text className="font-semibold mb-2">Please choose the Lecturer and course below to start your evaluation,</Text>
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
               placeholderStyle={styles.placeholderStyle}
@@ -219,7 +219,7 @@ const Home = () => {
               maxHeight={300}
               labelField="label"
               valueField="value"
-              placeholder={!isFocus ? 'Select module' : '...'}
+              placeholder={!isFocus ? 'Select course' : '...'}
               searchPlaceholder="Search..."
               value={module}
               onFocus={() => setIsFocus(true)}
