@@ -8,12 +8,13 @@ import { Dropdown } from 'react-native-element-dropdown';
 import RadioForm from 'react-native-simple-radio-button';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Home = () => {
 
 const {logout, studentInfo, authToken} = useContext(AuthContext)
-const {course,questions,fetchQuestionsDetails} = useContext(QuestionsContext)
+const {course, questions,fetchQuestionsDetails} = useContext(QuestionsContext)
 const [lecture, setLecture] = useState(null);
 const [module, setModule] = useState(null);
 const [comment, setComment] = useState('');
@@ -21,12 +22,8 @@ const [rates, setRates] = useState(0);
 const [isFocus, setIsFocus] = useState(false);
 const [items, setItems] = useState([])
 
-// useEffect(()=>{
-//   if (authToken) {
-//     fetchQuestionsDetails()
-//   }
-//   console.log('useeffect of home');
-// },[authToken])
+
+// fetchQuestionsDetails()
 
 const lectures = []
 
